@@ -11,15 +11,12 @@ cube = [face_1, face_2, face_3, face_4, face_5, face_6]
 
 
 def show_face(face):
-    counter = 1
     row = ''
-    for color in face:
+    for (counter, color) in enumerate(face):
         row += color + ' '
-        if counter % 3 == 0:
-            print(row)
-            row = ''
-        counter += 1
-    print('\n')
+        if (counter + 1) % 3 == 0:
+            row += '\n'
+    print(row)
 
     
 def show_cube(cube):
