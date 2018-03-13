@@ -1,4 +1,4 @@
-# Projet__Rubics-cube
+# Projet_Rubics-cube
 Now we have a nice virtual Rubick's cube
 
 
