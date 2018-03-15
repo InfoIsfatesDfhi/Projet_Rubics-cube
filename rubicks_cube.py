@@ -1,3 +1,5 @@
+COLOR_ON_FACE = 9
+COLOR_CENTER = 4
 
 face_1 = ['R', 'B', 'Y', 'B', 'Y', 'Y', 'O', 'Y', 'R']
 face_2 = ['W', 'Y', 'B', 'O', 'R', 'R', 'W', 'W', 'W']
@@ -28,6 +30,7 @@ def show_cube(cube):
 
         
 def rotate_faces_to_swap(face_to_rotate, amount):
+    """ Change the order of faces """
     news_faces = []
     news_faces_end = []
     for i in range(len(face_to_rotate)):
@@ -39,8 +42,7 @@ def rotate_faces_to_swap(face_to_rotate, amount):
 
 
 def move_bottom(cube, amount):
-    amount = amount % 4
-    cube_aux = cube[::]           # slicing obligatoire pour éviter certaines particularités de python
+    cube_aux = cube[:] # slicing obligatoire pour éviter certaines particularités de python
     face_to_swap = ['1', '3', '5', '6']
     news_faces = rotate_faces_to_swap(face_to_swap, amount)
     for i in range(len(face_to_swap)):
@@ -51,13 +53,11 @@ def move_bottom(cube, amount):
 
 
 def move_top(cube, amount):
-    amount = amount % 4
-    return move_bottom(cube, 4 - amount)
+    return move_bottom(cube, 4 - amount % 4)
 
 
 def move_right(cube, amount):
-    amount = amount % 4
-    cube_aux = cube[::]
+    cube_aux = cube[:]
     face_to_swap = ['2', '3', '4', '6']   
     news_faces = rotate_faces_to_swap(face_to_swap, amount)   
     if amount != 0:
@@ -72,24 +72,22 @@ def move_right(cube, amount):
 
 
 def move_left(cube, amount):
-    return move_right(cube, 4 - amount)
+    return move_right(cube, 4 - amount % 4)
     
 
 def move_clockwise(face, amount):
-    face_aux = face[::]
+    face_aux = face[:]
     for n in range(amount):
         for i in range(len(face_aux) // 3):
             ray = face_aux[i::3]        
             ray.reverse()
-            face[i * 3:(i + 1) * 3:] = ray
-        face_aux = face[::]
+            face[i * 3:(i + 1) * 3] = ray
+        face_aux = face[:]
     return face
 
         
 def move_inverse_clockwise(face, amount):
     return move_clockwise(face, 4 - amount)
-
-
 
 # Code of all Rubick's cube move (Name of them : https://www.rubiks.com/uploads/blog_entries/8.png)
             
