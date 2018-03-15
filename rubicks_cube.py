@@ -28,17 +28,10 @@ def show_cube(cube):
         show_face(face)
         counter += 1
 
-        
+
 def rotate_faces_to_swap(face_to_rotate, amount):
-    """ Change the order of faces """
-    news_faces = []
-    news_faces_end = []
-    for i in range(len(face_to_rotate)):
-        if i < len(face_to_rotate) - amount:
-            news_faces += [face_to_rotate[i]]
-        else:
-            news_faces_end += [face_to_rotate[i]]
-    return news_faces_end + news_faces
+    """ Change the order of faces (last elements become first) """
+    return face_to_rotate[-amount:] + face_to_rotate[:-amount]
 
 
 def move_bottom(cube, amount):
