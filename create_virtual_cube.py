@@ -1,6 +1,7 @@
 """
 
-Ce code permet de créer rapidement son Rubick's cube virtuel exploitable par le script "rubicks_cube.py". Il revoit une string de ce genre que l'on peut copier-coller :
+Ce code permet de créer rapidement son Rubick's cube virtuel exploitable par le script "rubicks_cube.py". Il renvoit une string de ce genre que
+l'on peut copier-coller :
 
 face_1 = ['W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W']
 face_2 = ['B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B']
