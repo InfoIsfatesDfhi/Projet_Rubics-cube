@@ -14,23 +14,20 @@ P.S : Il peut surement être amélioré (je n'ai pas passé beaucoup de temps de
 
 """
 
+from rubicks_cube import *
+from random import choice
+
+NUMBER_OF_FACES = 9
+
 def create_virtual_cube():
-    counter = 1
-    face_counter = 0
-    ALL_COLOR_NUMBER = 54
-    color_list = []
-    final_show = []
-    while counter <= ALL_COLOR_NUMBER:
-        color = input(f"color face_{face_counter}: ")
-        color_list += [color.upper()]
-        if counter % 9 == 0:
-            face_counter += 1
-            final_show += [f"face_{face_counter} = {color_list}"]
-            color_list = []
-        counter += 1        
-        if color == 'exit':
-            return None
-    for element in final_show:
-        print(element)
-        
-#create_virtual_cube()
+    print("""
+        Insert color from top-left to bottom-right.
+        That is to say:
+        1 2 3
+        4 5 6
+        7 8 9
+        """)
+    cube = []
+    for n_face in range(1, NUMBER_OF_FACES+1):
+        cube += [input(f"color face n°{n_face}: ").replace(' ', '').upper()]
+    return cube

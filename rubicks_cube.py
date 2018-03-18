@@ -1,5 +1,6 @@
 COLOR_ON_FACE = 9
 COLOR_CENTER = 4
+RAW_SIZE = 3
 
 face_1 = ['R', 'B', 'Y', 'B', 'Y', 'Y', 'O', 'Y', 'R']
 face_2 = ['W', 'Y', 'B', 'O', 'R', 'R', 'W', 'W', 'W']
@@ -13,14 +14,15 @@ cube = [face_1, face_2, face_3, face_4, face_5, face_6]
 
 
 def show_face(face):
+    """ Print a face of the cube """
     row = ''
     for (counter, color) in enumerate(face):
         row += color + ' '
         if (counter + 1) % 3 == 0:
             row += '\n'
     print(row)
-
     
+
 def show_cube(cube):
     counter = 1
     for face in cube:
@@ -36,10 +38,10 @@ def rotate_faces_to_swap(face_to_rotate, amount):
 
 def move_bottom(cube, amount):
     cube_aux = cube[:] # slicing obligatoire pour éviter certaines particularités de python
-    face_to_swap = ['1', '3', '5', '6']
-    news_faces = rotate_faces_to_swap(face_to_swap, amount)
+    face_to_swap = [0, 3, 4, 5]
+    new_faces = rotate_faces_to_swap(face_to_swap, amount)
     for i in range(len(face_to_swap)):
-        cube[int(face_to_swap[i]) - 1] = cube_aux[int(news_faces[i]) - 1]     
+        cube[face_to_swap[i]] = cube_aux[new_faces[i]]     
     cube[1] = move_clockwise(cube[1], amount)
     cube[3] = move_inverse_clockwise(cube[3], amount)    
     return cube
@@ -51,21 +53,21 @@ def move_top(cube, amount):
 
 def move_right(cube, amount):
     cube_aux = cube[:]
-    face_to_swap = ['2', '3', '4', '6']   
-    news_faces = rotate_faces_to_swap(face_to_swap, amount)   
+    face_to_swap = [1, 2, 3, 5]   
+    new_faces = rotate_faces_to_swap(face_to_swap, amount)   
     if amount != 0:
         cube_aux[5] = move_clockwise(cube_aux[5], 2)    
     for i in range(len(face_to_swap)):
         if i == 3:
-            cube[int(face_to_swap[i]) - 1] = move_clockwise(cube_aux[int(news_faces[i]) - 1], 2)
-        cube[int(face_to_swap[i]) - 1] = cube_aux[int(news_faces[i]) - 1] 
+            cube[face_to_swap[i]] = move_clockwise(cube_aux[new_faces[i]], 2)
+        cube[face_to_swap[i]] = cube_aux[new_faces[i]] 
     cube[0] = move_inverse_clockwise(cube[0], amount)
     cube[4] = move_clockwise(cube[4], amount)   
     return cube
 
 
 def move_left(cube, amount):
-    return move_right(cube, 4 - amount % 4)
+    return move_right(cube, 4 - amount)
     
 
 def move_clockwise(face, amount):
@@ -97,27 +99,23 @@ def find_neighboring_slices_face4(cube, neighboring_slices):
     
 def swap_neighboring_slices_face4_clockwise(cube, neighboring_slices, amount):
     slices_to_swap = find_neighboring_slices_face4(cube, neighboring_slices)
-    counter = 0
     news_slices = []
     news_slices_end = []
-    for element in slices_to_swap:
+    for (counter, element) in enumerate(slices_to_swap):
         if counter < amount:
             news_slices_end += [element]
         else:
             news_slices += [element]
-        counter += 1
     return news_slices + news_slices_end
 
 
 def r(cube, amount):
-    neighboring_slices = ['1', '3', '5', '6']
+    neighboring_slices = [0, 2, 4, 5]
     slices_to_change = swap_neighboring_slices_face4_clockwise(cube, neighboring_slices, amount)
     slices_to_change_counter = 0
     for number in neighboring_slices:
-        counter = 0
-        for i in range(2, len(cube[int(number) - 1]), 3):
+        for (counter, i) in enumerate(range(2, len(cube[int(number) - 1]), 3)):
             cube[int(number) - 1][i] = slices_to_change[slices_to_change_counter][counter]
-            counter += 1
         slices_to_change_counter += 1   
     cube[3] =  move_clockwise(cube[3], amount) 
     return cube
@@ -203,7 +201,3 @@ def ui(cube, amount):
     move_left(cube, 1)
     move_top(cube, 1)
     return cube
-
-
-# -- exemple to use the code --
-show_cube(ui(cube, 1))
