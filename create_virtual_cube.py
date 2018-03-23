@@ -35,8 +35,8 @@ def create_virtual_cube():
     return cube
 
 def random_cube():
-    (face_1, face_2, face_3) = (['W'] * 9, ['B'] * 9, ['Y'] * 9)
-    (face_4, face_5, face_6) = (['O'] * 9, ['G'] * 9, ['R'] * 9)
+    (face_1, face_2, face_3) = (['W'] * 9, ['R'] * 9, ['B'] * 9)
+    (face_4, face_5, face_6) = (['O'] * 9, ['Y'] * 9, ['G'] * 9)
     cube = [face_1, face_2, face_3, face_4, face_5, face_6]
 
     for loop in range(randrange(30, 50)): # How many iterations ?
