@@ -16,9 +16,9 @@ cube = [face_1, face_2, face_3, face_4, face_5, face_6]
 def show_face(face):
     """ Print a face of the cube """
     row = ''
-    for (counter, color) in enumerate(face):
+    for (counter, color) in enumerate(face, 1):
         row += color + ' '
-        if (counter + 1) % 3 == 0:
+        if counter % 3 == 0:
             row += '\n'
     print(row)
     
