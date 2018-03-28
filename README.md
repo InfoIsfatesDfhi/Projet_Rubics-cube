@@ -8,7 +8,7 @@ Now we have a nice virtual Rubick's cube
 
 * Chaques listes correspondent à une face du Rubick's Cube selon cet ordre:
 
-![Les faces du Rubick's Cube](https://image.noelshack.com/fichiers/2018/11/1/1520875166-rubick-s-cube.jpg)
+![Les faces du Rubick's Cube](https://image.noelshack.com/fichiers/2018/13/3/1522256144-cube.png)
 
 * Pour réaliser un mouvement souhaité il suffit d'appeller la fonction correspondante (à savoir le nom du mouvement en minuscule avec comme paramètre *cube* et *amount* qui correspond au nombre de tour que l'on veut réaliser) comme ceci: `ui(cube, 2)` ce code permet de réaliser deux fois le mouvement UI au cube. 
 
